@@ -1,0 +1,364 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 21, 2022 at 05:08 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 7.4.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `dadytees`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `itemId` int(11) NOT NULL,
+  `finalPrice` int(11) NOT NULL,
+  `itemDiscount` int(11) NOT NULL,
+  `itemName` varchar(255) DEFAULT NULL,
+  `itemPrice` int(11) NOT NULL,
+  `itemQuantity` int(11) NOT NULL,
+  `totalPrice` int(11) NOT NULL,
+  `orderId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`itemId`, `finalPrice`, `itemDiscount`, `itemName`, `itemPrice`, `itemQuantity`, `totalPrice`, `orderId`) VALUES
+(10, 9000, 3000, 'Boita Pattachitra paiting', 3000, 3, 9000, 9),
+(12, 5000, 5000, 'Krishna pattachitra', 5000, 1, 5000, 11),
+(14, 9000, 3000, 'Boita Pattachitra paiting', 3000, 3, 9000, 13);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `categoryId` int(11) NOT NULL,
+  `categoryDescription` varchar(255) DEFAULT NULL,
+  `categoryTitle` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`categoryId`, `categoryDescription`, `categoryTitle`) VALUES
+(4, 'PRODUCT SPECIFICATION:\n\nMaterial: 100% natural materials â Tassar silk fabrics, Crushed stone colours and natural glue.\nColor: Multi-Color\nFrame Type: Unframed', 'Pattachitra'),
+(5, 'Sterling silver chain finished with platinum designed by skilled artisans to exquisite perfection', 'Tarakasi necklace'),
+(7, 'Papier Mache is commonly used for large, temporary sculpture such as Carinval.', 'Paper mache'),
+(8, 'Dhokra is metal casted art that uses ancient lost-wax casting technique.', 'Dhokra casting'),
+(9, 'Bomkai saree is a handloom saree from odisha,India. It is an origin of Bomkai village from Ganjam district however later it is produced by the Bhulia community of Subarnapur district', 'Bomkai saree'),
+(10, 'A Sambalpuri sari is a traditional  sadhi or saree) wherein the warp and the weft are tie-dyed before weaving. It is produced in the Sambalpur, Balangir, Bargarh, Boudh and Sonepur districts of Odisha, India.', 'sambalpuri saree'),
+(11, 'The craft involves embroidering and stitching. For attaching the pieces of cloth the makers use straight stitch, satin stitch, blind stitch, or buttonhole stitch. They also make mirror work and many decorative stitches.', 'Pipili Applique work');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hibernate_sequence`
+--
+
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hibernate_sequence`
+--
+
+INSERT INTO `hibernate_sequence` (`next_val`) VALUES
+(15);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `orderId` int(11) NOT NULL,
+  `customerAddress` varchar(255) DEFAULT NULL,
+  `customerCity` varchar(255) DEFAULT NULL,
+  `customerEmail` varchar(255) DEFAULT NULL,
+  `customerMobileNo` varchar(255) DEFAULT NULL,
+  `customerName` varchar(255) DEFAULT NULL,
+  `customerPincode` int(11) DEFAULT NULL,
+  `customerState` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ordertablebuy`
+--
+
+CREATE TABLE `ordertablebuy` (
+  `order_id` int(11) NOT NULL,
+  `order_date` date DEFAULT NULL,
+  `order_price` int(11) DEFAULT NULL,
+  `order_quantity` int(11) DEFAULT NULL,
+  `order_status` varchar(15) DEFAULT NULL,
+  `userD_user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `pId` int(11) NOT NULL,
+  `pDesc` varchar(3000) DEFAULT NULL,
+  `pDiscount` int(11) NOT NULL,
+  `pName` varchar(255) DEFAULT NULL,
+  `pPhoto` longblob DEFAULT NULL,
+  `pPrice` int(11) NOT NULL,
+  `pQuantity` int(11) NOT NULL,
+  `category_categoryId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`pId`, `pDesc`, `pDiscount`, `pName`, `pPhoto`, `pPrice`, `pQuantity`, `category_categoryId`) VALUES
+(3, 'These are exotic ancient painting on tassar (silk) which is a natural fabric or on hand made canvas (Patta). As a religion art form it evolved from the temple rituals, more specifically from the temple of Jagannath at Puri and else where in Orissa. These paintings potray a large variety of themes, from religious and mythical stories to exotic and raga (musical) narratives.', 10, 'Boita Pattachitra paiting', 0x626f6974612062616e64616e612e6a7067, 3000, 10, 4),
+(4, 'Lord Jagannath, the king of Universe is all decked up in royal apparel with brother Balbhadra and sister Subhadra. Adorning the floral garlands and jewels the trio look ravishing. The traditional art form of Odisha etching their beloved almighty with the splash of colours and finest brushstrokes look divine and sacred. This art piece marks presence of the almighty and welcomes positivity.\r\n\r\nMedium : Natural Colour\r\nMaterial : Handmade Paper \r\nSize : 13*19 (Inches)\r\nProduct Category : Paintings\r\nSub Category : Odisha Pattachitra Paintings\r\nSKU:  KCPNMSL130\r\nCountry Of Origin : India\r\n', 20, 'chaturdha murti pattachitra painting', 0x636861747572646861206d757274692e6a7067, 3750, 22, 4),
+(5, 'Pure and refined, this necklace by Tarinika defines elegance. Gleaming CZ stones are artfully aligned to create a two-layer contrast necklace set. Centered with a floral medallion this necklace is based on an antique silver-plated base to perfect your festive look.\r\n\r\nDetails & Specifications:\r\n\r\nMaterials used: CZ stones with Antique Plating\r\nWeight - Necklace: 53.84 gm Earrings: 21.6 gm\r\nLength - Necklace: 21.5 cm Earrings: 6 cm', 20, 'Necklace with maangtika', 0x6e65636b6c616365206d61616e6774696b612e6a7067, 1000, 10, 5),
+(6, 'Pure and refined, this necklace by Tarinika defines elegance. Gleaming CZ stones are artfully aligned to create a two-layer contrast necklace set. Centered with a floral medallion this necklace is based on an antique  silver-plated base to perfect your festive look.\r\n\r\nDetails & Specifications:\r\n\r\nMaterials used: CZ stones with Antique Plating\r\nWeight - Necklace: 53.84 gm Earrings: 21.6 gm\r\nLength - Necklace: 21.5 cm Earrings: 6 cm', 15, 'Necklace set with maangtika and earrings', 0x6e65636b6c6163652073657420746172616b6173692e6a7067, 1020, 13, 5),
+(7, 'Filigree or Tarakasi is highly skilled art form of India, which is more than 500 years old craft. The fine silver filigree is famous internationally for its unique and excellent craftsmanship.Filigree is a jewelry art where beaten silver is drawn into fine wires and foils which are then fashioned together to create beautiful jewelry. At-least once you should give it a try and it\'s sure you will proud your decision to buy it. Every Piece of my jewelry will give you the glimpse of India\'s best craftsmanship. Hope you would like my jewelry collection and give me an opportunity to serve you with a quality product.', 10, 'Earrings with maangtika', 0x746172616b617369332e6a7067, 550, 10, 5),
+(8, 'The âTalapatra Chitraâ or the Palm leaf painting is a known art form of the village Raghurajpur, Puri district, Odisha. The fine pictorial depiction makes distinguishes this art form from the rest. The fine lines and overall look and placement of elements stand out in a unique way.\r\nThis very complicated art form is done on dried palm leaves and stitched together to look for a canvas. These amazingly beautiful intricacies are delicately done as one small mistake can destroy their entire creativity.\r\n\r\n \r\n\r\nDimensions: 12Inch x 10 Inch.', 10, 'Ganesh palm leaf pattachitra', 0x67616e6573682070616c6d206c6561662e6a7067, 1600, 22, 4),
+(9, 'Stunning Diamante Payal , Foot Chain Jewellery Ankle Anklet Length 25 cm if you make round in your feet will be 12 cm Wight each 9 grams width 5mm Suitable for Party ,Wedding ,all Occasions', 15, 'Anklet Tarakasi', 0x616e6b6c65742e6a7067, 899, 22, 5),
+(10, 'chaturdha murti jagannath,subhadra,balabhadra ,sudarshan dessigned in tarakasi . tarakasi famous for silver work design.originated from odisha cuttack.', 10, 'chaturdha murti', 0x6a6167616e6e61746820746172616b6173692e6a7067, 2500, 30, 5),
+(11, 'chaturdha murti jagannath,subhadra,balabhadra ,sudarshan dessigned in tarakasi . tarakasi famous for silver work design.originated from odisha cuttack.', 22, 'jagannath tarakasi', 0x746172616b6173692e6a7067, 2200, 35, 5),
+(12, 'Patachitra artform is known for its intricate details as well as mythological narratives and folktales inscribed in it. Pattachitra is one of the ancient artworks of Odisha, originally created for ritual use and as souvenirs for pilgrims to Puri, as well as other temples in Odisha.\r\n\r\nPRODUCT SPECIFICATION :\r\n\r\nFrame Type: Unframed\r\n\r\nColor : Multicolour \r\n\r\nMaterial : Canvas\r\n\r\nSize : 13 * 19 Inches', 5, 'dashavtar', 0x6461736861767461722e6a7067, 799, 18, 4),
+(13, 'Based on Hindu mythology and specially inspired by Jagannath and Vaishnava sect, Orissa Pattachitra is an ancient folk art form of rural Orissa that has been in existence for many centuries.', 15, 'Nabagunjar', 0x6e61626167756e6a61722e6a7067, 699, 22, 4),
+(14, 'Rath Yatra â Pattachitra Painting\r\nRatha Yatra, is a Hindu festival celebrated in Odisha for Jagannath and associated Hindu deities. His image, along with the other two associated deities, is ceremoniously brought out of the inner sanctum of his chief temple in Jagannath Puri. They are placed in a chariot which is then pulled by numerous volunteers to the Gundicha Temple.', 12, 'Rath yatra', 0x726174682079617472612e6a7067, 4000, 22, 4),
+(15, 'patachitra or Pattachitra is a general term for traditional, cloth-based scroll painting, based in the eastern Indian states of Odisha, West Bengal and parts of Bangladesh. Patachitra artform is known for its intricate details as well as mythological narratives and folktales inscribed in it', 10, 'Kanchi abhiyan pattachitra', 0x6b616e636869206162686979616e2e6a7067, 4000, 32, 4),
+(16, 'his painting is hand painted by the skilled artisans of Raghurajpur of Odisha which depicts a scene of  Lord Krishna (symbols of love in Hinduism) in pattachitra art form. These can be easily be hung against the wall as attractive wall decorations or gift to your loved ones.\r\nProduct Type: Pattachitra Painting\r\nColor: Cream\r\nFabric: Tussar Silk\r\nWork: Handpainted\r\nFrame Included: Yes\r\nRelated Products', 25, 'Krishna pattachitra', 0x6b726973686e612e6a7067, 5000, 22, 4),
+(17, 'The âTalapatra Chitraâ or the Palm leaf painting is a known art form of the village Raghurajpur, Puri district, Odisha. The fine pictorial depiction makes distinguishes this art form from the rest. The fine lines and overall look and placement of elements stand out in a unique way.\r\nThis very complicated art form is done on dried palm leaves and stitched together to look for a canvas. These amazingly beautiful intricacies are delicately done as one small mistake can destroy their entire creativity.\r\n\r\n \r\n\r\nDimensions: 13 Inch x 13Inch.', 22, 'Palm leaf pattachitra', 0x50617474616368697472612d53616e6174616e2d6e6179616b2d30322e6a7067, 4020, 25, 4),
+(18, 'The Talapatra chitra or the Palm leaf painting is a known art form of the village Raghurajpur, Puri district, Odisha. The fine pictorial depiction makes distinguishes this art form from the rest. The fine lines and overall look and placement of elements stands out in a unique way. Even without the depth or perspective visualization the art work has got its prominence for the two dimensional look and feel.Another form of Pattachitra, apart from painting on the cloth, is the most amazing engravings over a palm leaf. This very complicated art form is done on dried palm leaves and stitched up together to look for a canvas. These amazingly beautiful intricacies are delicately done as one small move can destroy their entire creativity. The stitching is done so that the carvings depict an entire picture and there are no gaps or lines to say that they are joined together. Again, the art relates to fables and stories from the Hindu mythology and tells tales photographically about an incident or episode of a God or Goddess, their different stages, to make the people understand the flow of their deityâs life.\r\nSize;-8Ã10', 12, 'Bkasur krishna palm leaf painting', 0x70616c6d206c65616620312e6a7067, 505, 24, 4),
+(19, 'Odisha, the land of Lord Jagannath is compatible with the traditional art form, Pattachitra. One of the many art forms to have survived over thousand years, All colours used in the paintings are natural and paintings are made up of the fully old traditional way of Odisha which is fascinating and most of the art depicts Hindu mythological story.\r\n\r\nProduct Type: Pattachitra Painting\r\nColor: Cream\r\nFabric: Tussar Silk\r\nWork: Handpainted\r\nFrame Included: Yes', 10, 'Radhe krishna pattachitra painting', 0x7261646861206b726973686e612e6a7067, 500, 12, 4),
+(20, 'Saraswati-Pattachitra Painting (19â³x13â³)\r\n\r\nSaraswati (also Sarasvati) is the Hindu goddess of learning, wisdom, music, and aesthetics. She is the goddess of speech.', 18, 'Saraswati pattachitra', 0x736172617377617469272e6a7067, 400, 25, 4),
+(21, 'Durga Ma â Pattachitra painting (13â³ x 19â³)\r\nThe name âDurgaâ in Sanskrit means âinvincibleâ. The syllable âduâ is synonymous with the 4 devils namely poverty, suffering, famine, and evil habits. Durga is a fiery form of Mother Goddess Parvati. A cosmic force that combines the energy of all celestial beings, Goddess Durga battled to eradicate demonic forces destroying the earth.\r\n\r\nDurga Ma - Pattachitra painting (13\" x 19\") quantity\r\n1\r\n\r\n Add to wishlist\r\nSKU:\r\n18128\r\nCategories: *3 Artwork, 25 Pattachitra Painting (Odisha and Bengal)\r\nTag: #PattachitraPainting#IndianFolkArt#IndianArt#PujaroomIdeas#HomeDecors#DurgaMa\r\nPinterestFacebookWhatsAppTwitterLinkedInGmailShare  Report Abuse\r\nDESCRIPTION\r\nSHIPPING\r\nADDITIONAL INFORMATION', 10, 'Durga maa pattachitra', 0x6475726761206d61612e6a7067, 603, 20, 4),
+(22, 'The âTalapatra Chitraâ or the Palm leaf painting is a known art form of the village Raghurajpur, Puri district, Odisha. The fine pictorial depiction makes distinguishes this art form from the rest. The fine lines and overall look and placement of elements stand out in a unique way.\r\nThis very complicated art form is done on dried palm leaves and stitched together to look for a canvas. These amazingly beautiful intricacies are delicately done as one small mistake can destroy their entire creativity.', 15, 'Ganesh palm leaf paintings', 0x472e352e342d7363616c65642e6a7067, 1606, 22, 4),
+(23, 'Original handmade painting, surface: paper\r\nArt Piece: Excellent wall decor for foyer and living room\r\ncleaning instruction: use a soft microfiber cloth for cleaning', 5, 'Paper mache elephant mask', 0x646f776e6c6f6164202832292e6a7067, 510, 15, 7),
+(24, 'Original handmade painting, surface: paper\r\nArt Piece: Excellent wall decor for foyer and living room\r\ncleaning instruction: use a soft microfiber cloth for cleaning', 5, 'Paper mache tiger mask', 0x646f776e6c6f61642e6a7067, 426, 20, 7),
+(25, 'Original handmade painting, surface: paper\r\nArt Piece: Excellent wall decor for foyer and living room\r\ncleaning instruction: use a soft microfiber cloth for cleaning', 15, 'Paper mache deva devi mask(pack of 2)', 0x646f776e6c6f6164202831292e6a7067, 1056, 22, 7),
+(26, 'Original handmade painting, surface: paper\r\nArt Piece: Excellent wall decor for foyer and living room\r\ncleaning instruction: use a soft microfiber cloth for cleaning', 5, 'Paper  mache hanuman mask ', 0x696d616765732e6a7067, 590, 25, 7),
+(27, 'Original handmade painting, surface: paper\r\nArt Piece: Excellent wall decor for foyer and living room\r\ncleaning instruction: use a soft microfiber cloth for cleaning', 10, 'paper mache kali maa mask', 0x646f776e6c6f6164202835292e6a7067, 506, 17, 7),
+(28, 'Original handmade painting, surface: paper\r\nArt Piece: Excellent wall decor for foyer and living room\r\ncleaning instruction: use a soft microfiber cloth for cleaning', 10, 'paper mache deva mask', 0x646f776e6c6f6164202834292e6a7067, 459, 28, 7),
+(29, 'Original handmade painting, surface: paper\r\nArt Piece: Excellent wall decor for foyer and living room\r\ncleaning instruction: use a soft microfiber cloth for cleaning', 10, 'paper mache elephant mask', 0x646f776e6c6f6164202833292e6a7067, 599, 14, 7),
+(30, 'Dhokra Craft Standing Ganesh. An elegant and unique curio with a raw, rustic appeal to enhance your decor. \r\nm9aterial : Brass\r\nCraft : Dhokra Metal Craft\r\nState : Odisha\r\nColour : Dull Gold', 15, 'Standing ganesha dhokra', 0x67616e657368612e6a7067, 930, 20, 8),
+(31, 'Dhokra craft horse head wall hanging.an elegant and unique curio with a raw,rustic appeal to enhance your decor.', 10, 'Dhokra elephant mask', 0x656c657068616e74206d61736b2e6a7067, 798, 22, 8),
+(32, 'dhokra craft horse head wall hanging.an elegant and unique curio with a raw,rustic appeal to enhance your decor.\r\nmaterial: Brass\r\ncraft : Dhokra metal craft \r\nstate :Odisha\r\ncolour : Dull Gold', 22, 'dhokra horse mask', 0x62756c6c6c20686561642e6a7067, 725, 35, 8),
+(33, 'dhokra craft coconut box wall hanging.an elegant and unique curio with a raw,rustic appeal to enhance your decor.\r\nmaterial: Brass\r\ncraft : Dhokra metal craft \r\nstate :Odisha\r\ncolour : Dull Gold', 20, 'Dhokra coconut box', 0x636f636f6e757420626f782e6a7067, 2200, 22, 8),
+(34, 'dhokra gaja gouri show piece.an elegant and unique curio with a raw,rustic appeal to enhance your decor.\r\nmaterial: Brass\r\ncraft : Dhokra metal craft \r\nstate :Odisha\r\ncolour : Dull Gold', 20, 'Dhokra gaja gouri', 0x656c657068616e7420676f7572692e6a7067, 890, 25, 8),
+(35, 'dhokra lantern.an elegant and unique curio with a raw,rustic appeal to enhance your decor.\r\nmaterial: Brass\r\ncraft : Dhokra metal craft \r\nstate :Odisha\r\ncolour : Dull Gold', 18, 'Dhokra lantern', 0x6c616e7465726e2e6a7067, 1400, 33, 8),
+(36, 'dhokra sun god wall hanging.an elegant and unique curio with a raw,rustic appeal to enhance your decor.\r\nmaterial: Brass\r\ncraft : Dhokra metal craft \r\nstate :Odisha\r\ncolour : Dull Gold', 25, 'dhokra  sun god', 0x73756e2e6a7067, 706, 39, 8),
+(37, 'dhokra craft bull.an elegant and unique curio with a raw,rustic appeal to enhance your decor.\r\nmaterial: Brass\r\ncraft : Dhokra metal craft \r\nstate :Odisha\r\ncolour : Dull Gold', 20, 'Dhokra craft nandi(bull)', 0x6e616e64692e6a7067, 2030, 25, 8),
+(38, 'dhokra fish pen stand.an elegant and unique curio with a raw,rustic appeal to enhance your decor.\r\nmaterial: Brass\r\ncraft : Dhokra metal craft \r\nstate :Odisha\r\ncolour : Dull Gold', 20, 'dhokra fish pen stand', 0x666973682070656e207374616e642e6a7067, 1050, 33, 8),
+(39, 'dhokra craft fish.an elegant and unique curio with a raw,rustic appeal to enhance your decor.\r\nmaterial: Brass\r\ncraft : Dhokra metal craft \r\nstate :Odisha\r\ncolour : Dull Gold', 20, 'dhokra craft fish', 0x666973682e6a7067, 1265, 25, 8),
+(40, 'Bomkai Cotton Saree â  With blouse piece.\r\n\r\nProduct Specification:\r\n\r\nâ¢ Fabric: Cotton\r\nâ¢ Blouse piece: Available\r\nâ¢ Color hues may slightly vary from that which appears in the image\r\nâ¢ Minor irregularities is the uniqueness of handlooms and makes each piece exquisite\r\n\r\nSpecial Instructions:\r\n\r\nâ¢ Suggested dry cleaning\r\nâ¢ Do not squeeze or wring\r\n', 20, 'Bomkai cotton saree (Maroon)', 0x61656231336638626465663738653638663635613338313436623037643131332e6a7067, 2800, 45, 9),
+(41, 'Bomkai Cotton Saree â  With blouse piece.\r\n\r\nProduct Specification:\r\n\r\nâ¢ Fabric: Cotton\r\nâ¢ Blouse piece: Available\r\nâ¢ Color hues may slightly vary from that which appears in the image\r\nâ¢ Minor irregularities is the uniqueness of handlooms and makes each piece exquisite\r\n\r\nSpecial Instructions:\r\n\r\nâ¢ Suggested dry cleaning\r\nâ¢ Do not squeeze', 20, 'bomkai cotton saree(black)', 0x626c61636b207265642e6a7067, 2250, 25, 9),
+(42, 'Bomkai Cotton Saree â  With blouse piece.\r\n\r\nProduct Specification:\r\n\r\nâ¢ Fabric: Cotton\r\nâ¢ Blouse piece: Available\r\nâ¢ Color hues may slightly vary from that which appears in the image\r\nâ¢ Minor irregularities is the uniqueness of handlooms and makes each piece exquisite\r\n\r\nSpecial Instructions:\r\n\r\nâ¢ Suggested dry cleaning\r\nâ¢ Do not squeeze', 20, 'bomkai cotton maroon yellow border saree', 0x65363761636330663732636237666232623438363739383331353262666563632e6a7067, 2100, 35, 9),
+(43, 'Bomkai Cotton Saree â  With blouse piece.\r\n\r\nProduct Specification:\r\n\r\nâ¢ Fabric: Cotton\r\nâ¢ Blouse piece: Available\r\nâ¢ Color hues may slightly vary from that which appears in the image\r\nâ¢ Minor irregularities is the uniqueness of handlooms and makes each piece exquisite\r\n\r\nSpecial Instructions:\r\n\r\nâ¢ Suggested dry cleaning\r\nâ¢ Do not squeeze2', 20, 'bomkai cotton yellow saree with green border', 0x696d61676573202831292e6a7067, 2500, 24, 9),
+(44, 'Bomkai Cotton Saree â  With blouse piece.\r\n\r\nProduct Specification:\r\n\r\nâ¢ Fabric: Cotton\r\nâ¢ Blouse piece: Available\r\nâ¢ Color hues may slightly vary from that which appears in the image\r\nâ¢ Minor irregularities is the uniqueness of handlooms and makes each piece exquisite\r\n\r\nSpecial Instructions:\r\n\r\nâ¢ Suggested dry cleaning\r\nâ¢ Do not squeeze', 20, 'Bomkai pata saree', 0x696d61676573202833292e6a7067, 3000, 22, 9),
+(45, 'Bomkai Cotton Saree â  With blouse piece.\r\n\r\nProduct Specification:\r\n\r\nâ¢ Fabric: Cotton\r\nâ¢ Blouse piece: Available\r\nâ¢ Color hues may slightly vary from that which appears in the image\r\nâ¢ Minor irregularities is the uniqueness of handlooms and makes each piece exquisite\r\n\r\nSpecial Instructions:\r\n\r\nâ¢ Suggested dry cleaning\r\nâ¢ Do not squeeze', 20, 'bomkai pata elephant head design', 0x6d61726f6f6e312e6a7067, 2200, 22, 9),
+(46, 'Bomkai Cotton Saree â  With blouse piece.\r\n\r\nProduct Specification:\r\n\r\nâ¢ Fabric: Cotton\r\nâ¢ Blouse piece: Available\r\nâ¢ Color hues may slightly vary from that which appears in the image\r\nâ¢ Minor irregularities is the uniqueness of handlooms and makes each piece exquisite\r\n\r\nSpecial Instructions:\r\n\r\nâ¢ Suggested dry cleaning\r\nâ¢ Do not squeeze', 20, 'Bomkai saree', 0x6d6172726f6e20626c61636b2e6a7067, 2300, 24, 9),
+(47, 'Bomkai Cotton Saree â  With blouse piece.\r\n\r\nProduct Specification:\r\n\r\nâ¢ Fabric: Cotton\r\nâ¢ Blouse piece: Available\r\nâ¢ Color hues may slightly vary from that which appears in the image\r\nâ¢ Minor irregularities is the uniqueness of handlooms and makes each piece exquisite\r\n\r\nSpecial Instructions:\r\n\r\nâ¢ Suggested dry cleaning\r\nâ¢ Do not squeeze', 20, 'Bmkai saree(red and white)', 0x70696e6b2077686974652e6a7067, 2400, 25, 9),
+(48, 'Bomkai Cotton Saree â  With blouse piece.\r\n\r\nProduct Specification:\r\n\r\nâ¢ Fabric: Cotton\r\nâ¢ Blouse piece: Available\r\nâ¢ Color hues may slightly vary from that which appears in the image\r\nâ¢ Minor irregularities is the uniqueness of handlooms and makes each piece exquisite\r\n\r\nSpecial Instructions:\r\n\r\nâ¢ Suggested dry cleaning\r\nâ¢ Do not squeeze', 25, 'Bomkai pata saree (pink with yellow border)', 0x70696e6b20796c6f77312e6a7067, 3000, 20, 9),
+(49, 'Bomkai Cotton Saree â  With blouse piece.\r\n\r\nProduct Specification:\r\n\r\nâ¢ Fabric: Cotton\r\nâ¢ Blouse piece: Available\r\nâ¢ Color hues may slightly vary from that which appears in the image\r\nâ¢ Minor irregularities is the uniqueness of handlooms and makes each piece exquisite\r\n\r\nSpecial Instructions:\r\n\r\nâ¢ Suggested dry cleaning\r\nâ¢ Do not squeeze', 20, 'bomkai pata orange and black color', 0x72656420626c61636b2e6a7067, 2000, 28, 9),
+(50, 'Bomkai Cotton Saree â  With blouse piece.\r\n\r\nProduct Specification:\r\n\r\nâ¢ Fabric: Cotton\r\nâ¢ Blouse piece: Available\r\nâ¢ Color hues may slightly vary from that which appears in the image\r\nâ¢ Minor irregularities is the uniqueness of handlooms and makes each piece exquisite\r\n\r\nSpecial Instructions:\r\n\r\nâ¢ Suggested dry cleaning\r\nâ¢ Do not squeeze', 20, 'Bomkai pata saree (yellow color with blue color border)', 0x796c6f7720626c75652e6a7067, 2900, 25, 9),
+(51, 'Sambalpuri saree is a traditional handwoven saree wherein the warp and the weft are tie-dyed before weaving. This particular gorgeous Sambalpuri cotton saree comes with a blouse piece.\r\n\r\nProduct Specifications:-\r\nMaterials :- Cotton\r\nBlouse Piece :- Available\r\nColour hues may slightly vary from that which appears in the image.', 20, 'sambalpuri chakra aanchal saree', 0x6368616b726120616e6368616c322e6a7067, 9072, 25, 10),
+(52, 'Sambalpuri saree is a traditional handwoven ikat or sari wherein the warp and the weft are tie-dyed before weaving. This particular gorgeous Sambalpuri cotton saree comes with a blouse piece.\r\n\r\nProduct Specifications:-\r\nMaterials :- Cotton\r\nBlouse Piece :- Available\r\nColour hues may slightly vary from that which appears in the image.', 25, 'sambalpuri saree (dolavedi print)', 0x646f6c6176656469322e6a7067, 8000, 30, 10),
+(53, 'Sambalpuri saree is a traditional handwoven ikat or sari wherein the warp and the weft are tie-dyed before weaving. This particular gorgeous Sambalpuri cotton saree comes with a blouse piece.\r\n\r\nProduct Specifications:-\r\nMaterials :- Cotton\r\nBlouse Piece :- Available\r\nColour hues may slightly vary from that which appears in the image.', 20, 'sambalpuri saree(fish print)', 0x66697368207374796c65312e6a7067, 7098, 25, 10),
+(54, 'Sambalpuri saree is a traditional handwoven ikat or sari wherein the warp and the weft are tie-dyed before weaving. This particular gorgeous Sambalpuri cotton saree comes with a blouse piece.\r\n\r\nProduct Specifications:-\r\nMaterials :- Cotton\r\nBlouse Piece :- Available\r\nColour hues may slightly vary from that which appears in the image', 25, 'laha rudrakshya sambalpuri saree', 0x6c6168612072756472616b7368796120312e6a7067, 8099, 35, 10),
+(55, 'Sambalpuri saree is a traditional handwoven ikat or sari wherein the warp and the weft are tie-dyed before weaving. This particular gorgeous Sambalpuri cotton saree comes with a blouse piece.\r\n\r\nProduct Specifications:-\r\nMaterials :- Cotton\r\nBlouse Piece :- Available\r\nColour hues may slightly vary from that which appears in the image.', 25, 'sambalpuri saree(pasapali print)', 0x696d616765732e6a7067, 7000, 21, 10),
+(56, 'Sambalpuri saree is a traditional handwoven ikat or sari wherein the warp and the weft are tie-dyed before weaving. This particular gorgeous Sambalpuri cotton saree comes with a blouse piece.\r\n\r\nProduct Specifications:-\r\nMaterials :- Cotton\r\nBlouse Piece :- Available\r\nColour hues may slightly vary from that which appears in the image.', 20, 'sambalpuri saree(pasapali print red)', 0x7061736170616c692072656420626c61636b2e6a7067, 4899, 18, 10),
+(57, 'Sambalpuri saree is a traditional handwoven ikat or sari wherein the warp and the weft are tie-dyed before weaving. This particular gorgeous Sambalpuri cotton saree comes with a blouse piece.\r\n\r\nProduct Specifications:-\r\n\r\nMaterials :- Silk\r\nBlouse Piece :- Available\r\nColour hues may slightly vary from that which appears in the image.', 20, 'sambalpuri green silk saree ', 0x73616d62616c707572692073696c6b20312e6a7067, 4000, 13, 10),
+(59, 'Sambalpuri saree is a traditional handwoven ikat or sari wherein the warp and the weft are tie-dyed before weaving. This particular gorgeous Sambalpuri cotton saree comes with a blouse piece.\r\n\r\nProduct Specifications:-\r\nMaterials :- Cotton\r\nBlouse Piece :- Available\r\nColour hues may slightly vary from that which appears in the image.', 25, 'sambalpuri saree(tribal print)', 0x74726962616c312e6a7067, 6799, 21, 10),
+(60, 'Sambalpuri saree is a traditional handwoven ikat or sari wherein the warp and the weft are tie-dyed before weaving. This particular gorgeous Sambalpuri cotton saree comes with a blouse piece.\r\n\r\nProduct Specifications:-\r\nMaterials :- Cotton\r\nBlouse Piece :- Available\r\nColour hues may slightly vary from that which appears in the image.', 25, 'sambalpuri psasapali saree', 0x73616d62616c70757269207061736170616c692e6a7067, 5699, 34, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
+  `user_address` varchar(1500) DEFAULT NULL,
+  `user_email` varchar(100) DEFAULT NULL,
+  `user_name` varchar(100) DEFAULT NULL,
+  `user_password` varchar(100) DEFAULT NULL,
+  `user_phone` varchar(12) DEFAULT NULL,
+  `user_pic` varchar(1500) DEFAULT NULL,
+  `user_type` varchar(255) DEFAULT NULL,
+  `user_gender` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `user_address`, `user_email`, `user_name`, `user_password`, `user_phone`, `user_pic`, `user_type`, `user_gender`) VALUES
+(1, 'bvjh', 'admin@gmail.com', 'admin', 'admin', '125566456', NULL, 'admin', NULL);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_products`
+--
+
+CREATE TABLE `users_products` (
+  `USER_PRODUCT_ID` int(11) NOT NULL,
+  `orderTimestamp` datetime(6) DEFAULT NULL,
+  `productQuantity` int(11) NOT NULL,
+  `PRODUCT_ID` int(11) DEFAULT NULL,
+  `USER_ID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`itemId`),
+  ADD KEY `FK2cwhfpk982b92h4d3vv7b8n0c` (`orderId`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`categoryId`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`orderId`);
+
+--
+-- Indexes for table `ordertablebuy`
+--
+ALTER TABLE `ordertablebuy`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `FK5vu8hl21rifnpuxrf6vu1onqg` (`userD_user_id`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`pId`),
+  ADD KEY `FK825v7lftk50hyta3jlxerywcb` (`category_categoryId`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `users_products`
+--
+ALTER TABLE `users_products`
+  ADD PRIMARY KEY (`USER_PRODUCT_ID`),
+  ADD KEY `FKeu5im4w24s47d7sa644f8w9xm` (`PRODUCT_ID`),
+  ADD KEY `FK8wquv04rhkgivx4dkfwwg8vba` (`USER_ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `ordertablebuy`
+--
+ALTER TABLE `ordertablebuy`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `pId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `users_products`
+--
+ALTER TABLE `users_products`
+  MODIFY `USER_PRODUCT_ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `FK2cwhfpk982b92h4d3vv7b8n0c` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`);
+
+--
+-- Constraints for table `ordertablebuy`
+--
+ALTER TABLE `ordertablebuy`
+  ADD CONSTRAINT `FK5vu8hl21rifnpuxrf6vu1onqg` FOREIGN KEY (`userD_user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `FK825v7lftk50hyta3jlxerywcb` FOREIGN KEY (`category_categoryId`) REFERENCES `category` (`categoryId`);
+
+--
+-- Constraints for table `users_products`
+--
+ALTER TABLE `users_products`
+  ADD CONSTRAINT `FK8wquv04rhkgivx4dkfwwg8vba` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `FKeu5im4w24s47d7sa644f8w9xm` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`pId`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
